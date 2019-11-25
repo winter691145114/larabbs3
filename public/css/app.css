@@ -17048,3 +17048,12 @@ body {
   color: inherit;
 }
 
+/* captcha */
+
+.register-page img.captcha {
+  cursor: pointer;
+  border: solid 1px #ced4da;
+  border-radus: 4px;
+  padding: 3px;
+}
+
