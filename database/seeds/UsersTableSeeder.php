@@ -13,7 +13,7 @@ class UsersTableSeeder extends Seeder
     public function run()
     {
         $faker = app(Faker\Generator::class);
-        $avatar = [
+        $avatars = [
             'https://iocaffcdn.phphub.org/uploads/images/201710/14/1/s5ehp11z6s.png',
             'https://iocaffcdn.phphub.org/uploads/images/201710/14/1/Lhd1SHqu86.png',
             'https://iocaffcdn.phphub.org/uploads/images/201710/14/1/LOnMrqbHJn.png',
