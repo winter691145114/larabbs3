@@ -30,6 +30,7 @@ class UsersTableSeeder extends Seeder
         $user->name = "winter";
         $user->email = "691145114@qq.com";
         $user->avatar = 'https://iocaffcdn.phphub.org/uploads/images/201710/14/1/ZqM7iaP4CR.png';
+        $user->password = bcrypt('111111');
         $user->save();
     }
 }

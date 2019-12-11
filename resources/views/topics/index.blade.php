@@ -19,6 +19,7 @@
           <hr class="mt-2">
           <div class="card-body ">
             @include('topics._topic_list',['topics'=>$topics])
+
           </div>
         </div>
       </div>
