@@ -17,7 +17,6 @@ class TopicReplied extends Notification
      *
      * @return void
      */
-
     public $reply;
 
     public function __construct(Reply $reply)
@@ -33,7 +32,7 @@ class TopicReplied extends Notification
      */
     public function via($notifiable)
     {
-        return ['database','mail'];
+        return ['database'];
     }
 
     /**
@@ -52,19 +51,18 @@ class TopicReplied extends Notification
             'user_id' => $this->reply->user->id,
             'user_name' => $this->reply->user->name,
             'user_avatar' => $this->reply->user->avatar,
-            'topic_link' => $link,
             'topic_id' => $topic->id,
             'topic_title' => $topic->title,
+            'topic_link' => $link,
         ];
     }
 
     public function toMail($notifiable)
     {
-        $url = $this->reply->topic->link(['#reply'.$this->reply->id]);
         return (new MailMessage)
-                    ->line('您的话题有新的回复')
-                    ->action('查看回复', $url);
-
+                    ->line('The introduction to the notification.')
+                    ->action('Notification Action', url('/'))
+                    ->line('Thank you for using our application!');
     }
 
     /**

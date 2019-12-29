@@ -9,7 +9,23 @@ use Illuminate\Auth\MustVerifyEmail as MustVerifyEmailTrait;
 
 class User extends Authenticatable implements MustVerifyEmailContract
 {
-    use Notifiable,MustVerifyEmailTrait;
+    use MustVerifyEmailTrait;
+    use Notifiable{
+        notify as protected laravelNotify;
+    }
+
+    public  function notify($instance)
+    {
+        if(Auth::id() == $this->id)
+        {
+            return ;
+        }
+        if(method_exists($instance, 'toDatabase'))
+        {
+            $this->increment($this->notification_count);
+        }
+        $this->laravelNotify($instance);
+    }
 
     /**
      * The attributes that are mass assignable.
@@ -41,5 +57,10 @@ class User extends Authenticatable implements MustVerifyEmailContract
     public function Topics()
     {
         return $this->hasMany(Topic::class);
+    }
+
+    public function Replies()
+    {
+        return $this->hasMany(Reply::class);
     }
 }

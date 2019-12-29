@@ -6,12 +6,9 @@ class ReplyRequest extends Request
 {
     public function rules()
     {
-
-
-
-                return [
-                    'content' => 'required|min:3',
-                ];
+        return [
+            'content' => 'required|min:3',
+        ];
 
 
 
@@ -20,7 +17,7 @@ class ReplyRequest extends Request
     public function messages()
     {
         return [
-            'content.min' => '内容不得少于三个字符',
+            'content.min' => '回复内容不少于3个字符。',
         ];
     }
 }

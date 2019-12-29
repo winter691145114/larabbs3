@@ -59,7 +59,20 @@
           @endcan
         </div>
 
+
+
+        </div>
+
+        <div class="card mt-4 topic-reply">
+          <div class="card-body">
+            @includewhen(Auth::check(),'topics._reply_box',['topic'=>$topic])
+            @include('topics._reply_list',['replies' => $topic->replies()->with('user')->get()])
+          </div>
+        </div>
+
       </div>
+
+
 
 
     </div>

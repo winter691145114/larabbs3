@@ -15,26 +15,22 @@ class RepliesController extends Controller
     }
 
 
-
-
-
-
-	public function store(ReplyRequest $request,Reply $reply)
-	{
-		$reply->content = $request->content;
+    public function store(ReplyRequest $request, Reply $reply)
+    {
+        $reply->content = $request->content;
         $reply->topic_id = $request->topic_id;
         $reply->user_id  = Auth::id();
         $reply->save();
-		return redirect()->Route('topics.show',$reply->topic_id)->with('success', '评论发表成功！');
-	}
+        return redirect()->to($reply->topic->link())->with('success','回复发表成功');
+    }
 
-
-
-	public function destroy(Reply $reply)
-	{
+    public function destroy(Reply $reply)
+    {
         $this->authorize('destroy',$reply);
-		$reply->delete();
+        $reply->delete();
+        return redirect()->to($reply->topic->link())->with('success','评论删除成功');
+    }
 
-		return redirect()->to($reply->topic->link())->with('message', '删除成功');
-	}
+
+
 }
