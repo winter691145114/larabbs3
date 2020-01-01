@@ -20,7 +20,7 @@ class ReplyObserver
     public function created(Reply $reply)
     {
         $reply->topic->updateReplyCount();
-        $reply->topic->user->notify(new TopicReply($reply));
+        $reply->topic->user->notify(new TopicReplied($reply));
     }
 
     public function deleted(Reply $reply)

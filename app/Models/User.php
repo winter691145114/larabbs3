@@ -6,6 +6,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail as MustVerifyEmailContract;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Auth\MustVerifyEmail as MustVerifyEmailTrait;
+use Auth;
 
 class User extends Authenticatable implements MustVerifyEmailContract
 {
@@ -18,14 +19,15 @@ class User extends Authenticatable implements MustVerifyEmailContract
     {
         if(Auth::id() == $this->id)
         {
-            return ;
+            return;
         }
         if(method_exists($instance, 'toDatabase'))
         {
-            $this->increment($this->notification_count);
+            $this->increment('notification_count');
         }
         $this->laravelNotify($instance);
     }
+
 
     /**
      * The attributes that are mass assignable.
@@ -62,5 +64,12 @@ class User extends Authenticatable implements MustVerifyEmailContract
     public function Replies()
     {
         return $this->hasMany(Reply::class);
+    }
+
+    public function markAsRead()
+    {
+        $this->notification_count = 0;
+        $this->save();
+        $this->unReadNotifications->markAsRead();
     }
 }

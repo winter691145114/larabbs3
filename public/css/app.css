@@ -17549,3 +17549,25 @@ categories-show-page .topic-list .badge {
   color: #b3b3b3;
 }
 
+.notification-badge .badge {
+  font-size: 12px;
+  margin-top: 12px;
+}
+
+.notification-badge .badge-hint {
+  background-color: #F4A460;
+}
+
+.notification-badge .badge-secondary {
+  background-color: #C0C0C0;
+}
+
+.notifications-index-page .notification-list a {
+  color: inherit;
+}
+
+.notifications-index-page .notification-list .meta {
+  font-size: 0.7em;
+  color: #DCDCDC;
+}
+

@@ -115,3 +115,34 @@ body {
 
 }
 
+
+
+.notification-badge {
+  .badge {
+    font-size:12px ;
+    margin-top: 12px;
+  }
+
+  .badge-hint {
+      background-color: #F4A460 ;
+    }
+
+  .badge-secondary {
+      background-color: #C0C0C0;
+    }
+
+}
+
+
+.notifications-index-page {
+  .notification-list {
+    a {
+      color:inherit;
+    }
+
+    .meta {
+      font-size: 0.7em;
+      color: #DCDCDC;
+    }
+  }
+}

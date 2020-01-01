@@ -31,9 +31,9 @@
           </a>
         </li>
 
-        <li class="nav-item">
-          <a class="nav-link badge badge-pill badge-secondary " href="#" >
-            #
+        <li class="nav-item notification-badge">
+          <a class="nav-link badge badge-pill badge-{{ Auth::user()->notification_count>0 ? 'hint' : 'secondary'}} mt-2 text-white" href="{{ route('notifications.index') }}" >
+            {{ Auth::user()->notification_count }}
           </a>
         </li>
 
