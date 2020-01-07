@@ -32,10 +32,12 @@ class UsersTableSeeder extends Seeder
         $user->avatar = 'https://iocaffcdn.phphub.org/uploads/images/201710/14/1/ZqM7iaP4CR.png';
         $user->password = bcrypt('111111');
         $user->save();
+        $user->assignRole('Founder');
         $user2 = User::find(2);
         $user2->name = "summer";
         $user2->email = "691145115@qq.com";
         $user2->password = bcrypt('222222');
         $user2->save();
+        $user2->assignRole('Maintainer');
     }
 }

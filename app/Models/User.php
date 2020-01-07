@@ -6,11 +6,12 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail as MustVerifyEmailContract;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Auth\MustVerifyEmail as MustVerifyEmailTrait;
+use Spatie\Permission\Traits\HasRoles;
 use Auth;
 
 class User extends Authenticatable implements MustVerifyEmailContract
 {
-    use MustVerifyEmailTrait;
+    use MustVerifyEmailTrait,HasRoles;
     use Notifiable{
         notify as protected laravelNotify;
     }
@@ -72,4 +73,23 @@ class User extends Authenticatable implements MustVerifyEmailContract
         $this->save();
         $this->unReadNotifications->markAsRead();
     }
+
+    public function setPasswordAttribute($value)
+    {
+        if(strlen($value) != 60)
+        {
+            $value  = bcrypt($value);
+        }
+        $this->attributes['password'] = $value;
+    }
+
+    public function setAvatarAttribute($path)
+    {
+        if(! starts_with($path,'http'))
+        {
+            $path = config('app.url')."/uploads/Images/avatars/$path";
+        }
+        $this->attributes['avatar'] = $path;
+    }
+
 }

@@ -32,7 +32,7 @@
         </li>
 
         <li class="nav-item notification-badge">
-          <a class="nav-link badge badge-pill badge-{{ Auth::user()->notification_count>0 ? 'hint' : 'secondary'}} mt-2 text-white" href="{{ route('notifications.index') }}" >
+          <a class="nav-link badge badge-pill badge-{{ Auth::user()->notification_count>0 ? 'hint' : 'secondary'}} mt-2 text-white" href="{{ route('notifications.index') }} " >
             {{ Auth::user()->notification_count }}
           </a>
         </li>
@@ -43,6 +43,12 @@
             {{ Auth::user()->name }}
           </a>
           <div class="dropdown-menu" aria-labelledby="DD">
+            @can('manage_contents')
+              <a href="{{ url(config('administrator.uri')) }}" class="dropdown-item">
+                <i class="fas fa-tachometer-alt mr-2"></i>
+                管理后台
+              </a>
+            @endcan
             <a href="{{ route('users.show',Auth::id()) }}" class="dropdown-item">
               个人中心
             </a>
