@@ -4,10 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Models\Topic;
 use App\Models\Category;
+use App\Models\User;
+use App\Models\Link;
+
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\TopicRequest;
 use App\Handlers\ImageUploadHandler;
+
 use Auth;
 
 class TopicsController extends Controller
@@ -17,10 +21,13 @@ class TopicsController extends Controller
         $this->middleware('auth', ['except' => ['index', 'show']]);
     }
 
-	public function index(Topic $topic, Request $request)
+	public function index(Topic $topic, Request $request,User $user,Link $link)
 	{
 		$topics = $topic->withOrder($request->order)->paginate();
-		return view('topics.index', compact('topics'));
+        $links = $link->getLinkCache();
+
+        $active_users = $user->getActiveUsers();
+		return view('topics.index', compact('topics','active_users','links'));
 	}
 
     public function show(Topic $topic, Request $request)
